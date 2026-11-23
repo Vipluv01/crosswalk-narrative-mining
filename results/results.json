@@ -1,0 +1,736 @@
+{
+  "flow": {
+    "casualty_rows": 652821,
+    "vehicle_rows": 937265,
+    "collision_rows": 513801,
+    "pedestrian_casualties": 94398,
+    "unmatched_vehicle": 0,
+    "unmatched_collision": 0,
+    "movement_counts_all_pedestrians": {
+      "-1": 52,
+      "1": 29435,
+      "2": 4328,
+      "3": 19035,
+      "4": 3033,
+      "5": 5045,
+      "6": 703,
+      "7": 2854,
+      "8": 2686,
+      "9": 27227
+    },
+    "crossing_pedestrians": 55831
+  },
+  "split": {
+    "train": [
+      2021,
+      2022,
+      2023
+    ],
+    "val": 2024,
+    "test": 2025
+  },
+  "missing_share": {
+    "age_band_of_casualty": 0.016173810248786516,
+    "sex_of_casualty": 0.001970231591768014,
+    "pedestrian_location": 0.0,
+    "pedestrian_movement": 0.0,
+    "vehicle_type": 0.0014149845068152102,
+    "vehicle_manoeuvre": 0.023194999193996167,
+    "first_point_of_impact": 0.024466694130500975,
+    "speed_limit": 0.0,
+    "road_type": 0.0,
+    "junction_detail": 0.018717200121796135,
+    "pedestrian_crossing": 0.014920026508570508,
+    "light_conditions": 3.582239257760026e-05,
+    "weather_conditions": 0.0,
+    "road_surface_conditions": 0.00557038204581684,
+    "urban_or_rural_area": 5.3733588866400387e-05,
+    "carriageway_hazards": 0.017445505185291324
+  },
+  "severity_counts": {
+    "fatal": 1024,
+    "serious": 17632,
+    "slight": 37175
+  },
+  "masked_count": 7361,
+  "example_narratives": [
+    "pedestrian aged 21 - 25. male pedestrian. pedestrian location in centre of carriageway - not on refuge, island or central reservation. pedestrian movement crossing from offside - masked by parked or stationary vehicle. struck by car. vehicle unknown (self reported). first point of impact front. speed limit 20 mph. road type single carriageway. junction t or staggered junction. crossing facility no physical crossing facility within 50m. light darkness - lights lit. weather unknown. road surface unknown (self reported). urban area. carriageway hazard none",
+    "pedestrian aged 21 - 25. female pedestrian. pedestrian location in carriageway, crossing elsewhere. pedestrian movement crossing from nearside - masked by parked or stationary vehicle. struck by car. vehicle going ahead. first point of impact nearside. speed limit 30 mph. road type dual carriageway. junction t or staggered junction. crossing facility no physical crossing facility within 50m. light daylight. weather fine no high winds. road surface dry. urban area. carriageway hazard none"
+  ],
+  "n": {
+    "train": 32525,
+    "val": 11421,
+    "test": 11885
+  },
+  "confusion_test": [
+    [
+      122,
+      39,
+      53
+    ],
+    [
+      541,
+      467,
+      2866
+    ],
+    [
+      401,
+      528,
+      6868
+    ]
+  ],
+  "models": {
+    "TF-IDF narrative (with sightline text)": {
+      "C": 0.01,
+      "n_features": 765,
+      "val_macro_f1": 0.405069732065567,
+      "macro_f1": 0.38746318711785754,
+      "balanced_accuracy": 0.5238307685114203,
+      "recall_fatal": 0.5700934579439252,
+      "recall_serious": 0.12054723799690242,
+      "recall_slight": 0.8808516095934333,
+      "accuracy": 0.6274295330248212
+    },
+    "TF-IDF narrative (sightline text removed)": {
+      "C": 0.1,
+      "n_features": 736,
+      "val_macro_f1": 0.4034921344739697,
+      "macro_f1": 0.3944483432697292,
+      "balanced_accuracy": 0.5368167086798368,
+      "recall_fatal": 0.6074766355140186,
+      "recall_serious": 0.146618482188952,
+      "recall_slight": 0.8563550083365397,
+      "accuracy": 0.6205300799326883
+    },
+    "One-hot codes (with movement code)": {
+      "C": 0.01,
+      "n_features": 145,
+      "val_macro_f1": 0.40622419344129107,
+      "macro_f1": 0.395177597347685,
+      "balanced_accuracy": 0.5331550533945045,
+      "recall_fatal": 0.5887850467289719,
+      "recall_serious": 0.14842540010325245,
+      "recall_slight": 0.862254713351289,
+      "accuracy": 0.6246529238535969
+    },
+    "One-hot codes (movement code removed)": {
+      "C": 0.03,
+      "n_features": 141,
+      "val_macro_f1": 0.4061430922347064,
+      "macro_f1": 0.3930306311582685,
+      "balanced_accuracy": 0.5288438284777542,
+      "recall_fatal": 0.5794392523364486,
+      "recall_serious": 0.14894166236448117,
+      "recall_slight": 0.8581505707323329,
+      "accuracy": 0.621960454354228
+    },
+    "Speed limit only": {
+      "C": 0.003,
+      "n_features": 6,
+      "val_macro_f1": 0.3155679133500527,
+      "macro_f1": 0.3103797892049258,
+      "balanced_accuracy": 0.41699559340060893,
+      "recall_fatal": 0.2897196261682243,
+      "recall_serious": 0.0,
+      "recall_slight": 0.9612671540336026,
+      "accuracy": 0.6358435002103492
+    },
+    "Dummy (most_frequent)": {
+      "C": null,
+      "n_features": 0,
+      "val_macro_f1": null,
+      "macro_f1": 0.26409917691291535,
+      "balanced_accuracy": 0.3333333333333333,
+      "recall_fatal": 0.0,
+      "recall_serious": 0.0,
+      "recall_slight": 1.0,
+      "accuracy": 0.6560370214556164
+    },
+    "Dummy (stratified)": {
+      "C": null,
+      "n_features": 0,
+      "val_macro_f1": null,
+      "macro_f1": 0.3327054632854824,
+      "balanced_accuracy": 0.3328650953557686,
+      "recall_fatal": 0.02336448598130841,
+      "recall_serious": 0.30356220960247804,
+      "recall_slight": 0.6716685904835193,
+      "accuracy": 0.5400084139671856
+    }
+  },
+  "paired_bootstrap_macro_f1": {
+    "sightline text: with - without": {
+      "diff": -0.006985156151871674,
+      "ci95": [
+        -0.01244173786027305,
+        -0.0019093402669965703
+      ]
+    },
+    "TF-IDF - one-hot codes": {
+      "diff": -0.00771441022982744,
+      "ci95": [
+        -0.013345135936558776,
+        -0.0021720121373069645
+      ]
+    },
+    "TF-IDF - speed limit only": {
+      "diff": 0.07708339791293173,
+      "ci95": [
+        0.06552621020126052,
+        0.08850496884700007
+      ]
+    },
+    "TF-IDF - stratified dummy": {
+      "diff": 0.05475772383237515,
+      "ci95": [
+        0.03985678603147489,
+        0.0688315091812055
+      ]
+    }
+  },
+  "top_terms": {
+    "fatal": [
+      [
+        "aged 75",
+        1.348368306837605
+      ],
+      [
+        "pedestrian aged 75",
+        1.348368306837605
+      ],
+      [
+        "75",
+        1.3053188276137464
+      ],
+      [
+        "going",
+        0.5456758498842134
+      ],
+      [
+        "vehicle going ahead",
+        0.5456758498842134
+      ],
+      [
+        "vehicle going",
+        0.5456758498842134
+      ],
+      [
+        "going ahead",
+        0.5456758498842134
+      ],
+      [
+        "7",
+        0.5380371168471527
+      ],
+      [
+        "struck goods",
+        0.5176560750952521
+      ],
+      [
+        "ahead",
+        0.5155073969385324
+      ],
+      [
+        "speed limit 70",
+        0.4951179551241151
+      ],
+      [
+        "limit 70",
+        0.4951179551241151
+      ]
+    ],
+    "fatal_sightline_ranks": {
+      "masked parked": [
+        564,
+        -0.06549496919340791
+      ],
+      "masked parked stationary": [
+        567,
+        -0.06549496919340791
+      ],
+      "masked": [
+        568,
+        -0.06549496919340791
+      ]
+    },
+    "serious": [
+      [
+        "75",
+        0.5368436518738888
+      ],
+      [
+        "aged 75",
+        0.5073049607987442
+      ],
+      [
+        "pedestrian aged 75",
+        0.5073049607987442
+      ],
+      [
+        "vehicle going ahead",
+        0.2662956567668287
+      ],
+      [
+        "vehicle going",
+        0.2662956567668287
+      ],
+      [
+        "going ahead",
+        0.2662956567668287
+      ],
+      [
+        "going",
+        0.2662956567668287
+      ],
+      [
+        "ahead",
+        0.24585865612247512
+      ],
+      [
+        "darkness lights unlit",
+        0.16493962301806037
+      ],
+      [
+        "unlit",
+        0.16493962301806037
+      ],
+      [
+        "lights unlit",
+        0.16493962301806037
+      ],
+      [
+        "66 75",
+        0.15340600562541087
+      ]
+    ],
+    "serious_sightline_ranks": {
+      "masked parked": [
+        271,
+        0.015783186015381322
+      ],
+      "masked parked stationary": [
+        273,
+        0.015783186015381322
+      ],
+      "masked": [
+        272,
+        0.015783186015381322
+      ]
+    },
+    "slight": [
+      [
+        "unknown",
+        0.3259013629558082
+      ],
+      [
+        "pedestrian aged data",
+        0.27835778231813013
+      ],
+      [
+        "aged data",
+        0.27835778231813013
+      ],
+      [
+        "aged data missing",
+        0.27835778231813013
+      ],
+      [
+        "vehicle reversing",
+        0.25326168775050384
+      ],
+      [
+        "reversing",
+        0.25326168775050384
+      ],
+      [
+        "weather unknown",
+        0.2450736338378659
+      ],
+      [
+        "vehicle moving",
+        0.19044482344331204
+      ],
+      [
+        "self",
+        0.1703940531228099
+      ],
+      [
+        "self reported",
+        0.16704869165234235
+      ],
+      [
+        "unknown self reported",
+        0.16704869165234235
+      ],
+      [
+        "unknown self",
+        0.16704869165234235
+      ]
+    ],
+    "slight_sightline_ranks": {
+      "masked parked": [
+        502,
+        -0.015324764125909432
+      ],
+      "masked parked stationary": [
+        503,
+        -0.015324764125909432
+      ],
+      "masked": [
+        504,
+        -0.015324764125909432
+      ]
+    }
+  },
+  "vocab_size": 765,
+  "or_crude": {
+    "table": [
+      2520,
+      4841,
+      16136,
+      32334
+    ],
+    "or": 1.0431073532482675,
+    "ci95": [
+      0.9905299265392936,
+      1.0984755949798584
+    ],
+    "ksi_rate_masked": 0.3423447901100394,
+    "ksi_rate_unmasked": 0.332906952754281
+  },
+  "or_by_speed_limit": {
+    "20": {
+      "table": [
+        653,
+        1332,
+        3394,
+        8220
+      ],
+      "or": 1.187323151082727,
+      "ci95": [
+        1.07238616527647,
+        1.314578936901498
+      ],
+      "ksi_rate_masked": 0.32896725440806046,
+      "ksi_rate_unmasked": 0.29223351127949027
+    },
+    "30": {
+      "table": [
+        1725,
+        3335,
+        11199,
+        22743
+      ],
+      "or": 1.0504170630998457,
+      "ci95": [
+        0.9868971084706404,
+        1.1180253716227502
+      ],
+      "ksi_rate_masked": 0.3409090909090909,
+      "ksi_rate_unmasked": 0.3299452006363797
+    },
+    "40": {
+      "table": [
+        90,
+        137,
+        989,
+        1080
+      ],
+      "or": 0.7173802336652078,
+      "ci95": [
+        0.5424104248762271,
+        0.9487914981925039
+      ],
+      "ksi_rate_masked": 0.3964757709251101,
+      "ksi_rate_unmasked": 0.47800869985500244
+    },
+    "50": {
+      "table": [
+        17,
+        17,
+        185,
+        129
+      ],
+      "or": 0.6972972972972973,
+      "ci95": [
+        0.3432094114631112,
+        1.4166963509110404
+      ],
+      "ksi_rate_masked": 0.5,
+      "ksi_rate_unmasked": 0.589171974522293
+    },
+    "60": {
+      "table": [
+        23,
+        16,
+        248,
+        125
+      ],
+      "or": 0.7245463709677419,
+      "ci95": [
+        0.36953063446836915,
+        1.420633080766841
+      ],
+      "ksi_rate_masked": 0.5897435897435898,
+      "ksi_rate_unmasked": 0.6648793565683646
+    }
+  },
+  "or_by_age": {
+    "child (0-15)": {
+      "table": [
+        1099,
+        2446,
+        3589,
+        9551
+      ],
+      "or": 1.1956845744936548,
+      "ci95": [
+        1.1028046485878151,
+        1.2963869924857594
+      ],
+      "ksi_rate_masked": 0.31001410437235544,
+      "ksi_rate_unmasked": 0.27313546423135465
+    },
+    "adult (16-65)": {
+      "table": [
+        1097,
+        2007,
+        8676,
+        18479
+      ],
+      "or": 1.1641747544268182,
+      "ci95": [
+        1.0769398136452932,
+        1.2584759535049863
+      ],
+      "ksi_rate_masked": 0.35341494845360827,
+      "ksi_rate_unmasked": 0.31949917142331064
+    },
+    "older (66+)": {
+      "table": [
+        313,
+        312,
+        3781,
+        3578
+      ],
+      "or": 0.9493435463416949,
+      "ci95": [
+        0.8062894861485901,
+        1.1177786445977977
+      ],
+      "ksi_rate_masked": 0.5008,
+      "ksi_rate_unmasked": 0.5137926348688681
+    }
+  },
+  "child_share": {
+    "masked": 0.4815921749762261,
+    "unmasked": 0.2710955230039199
+  },
+  "dark_share": {
+    "masked": 0.1965765520988996,
+    "unmasked": 0.3061068702290076
+  },
+  "speed_limit_share_masked": {
+    "20": 0.2696644477652493,
+    "30": 0.6874066023638092,
+    "40": 0.03083820133134085,
+    "50": 0.004618937644341801,
+    "60": 0.005298193180274419,
+    "70": 0.002173617714984377
+  },
+  "speed_limit_share_unmasked": {
+    "20": 0.23961213121518465,
+    "30": 0.7002682071384362,
+    "40": 0.04268619764802971,
+    "50": 0.006478233959149989,
+    "60": 0.007695481741283268,
+    "70": 0.0032597482979162366
+  },
+  "or_adjusted": {
+    "n": 54920,
+    "terms": {
+      "masked": {
+        "or": 1.2032645007618605,
+        "ci95": [
+          1.139547838703992,
+          1.2705438153788475
+        ],
+        "p": 2.6309615173545244e-11
+      },
+      "dark": {
+        "or": 1.4652546186912134,
+        "ci95": [
+          1.4068352539915279,
+          1.526099869550797
+        ],
+        "p": 1.235985674369278e-75
+      },
+      "casualty_injury_based": {
+        "or": 1.3417488550111676,
+        "ci95": [
+          1.2902260408402388,
+          1.395329138413118
+        ],
+        "p": 5.182104206639389e-49
+      },
+      "rural": {
+        "or": 1.085449270957406,
+        "ci95": [
+          1.0145598050803661,
+          1.1612919355982525
+        ],
+        "p": 0.01733904096634213
+      },
+      "on_facility": {
+        "or": 0.8911443813869822,
+        "ci95": [
+          0.8537571547954373,
+          0.9301688472149495
+        ],
+        "p": 1.361969289653549e-07
+      },
+      "speed_20": {
+        "or": 0.8462732471153146,
+        "ci95": [
+          0.8095543370225737,
+          0.884657614728001
+        ],
+        "p": 1.6433834201674626e-13
+      },
+      "speed_40": {
+        "or": 1.8185919698103994,
+        "ci95": [
+          1.6655887065390176,
+          1.9856503227205287
+        ],
+        "p": 1.3945409538465704e-40
+      },
+      "speed_50": {
+        "or": 2.750532561267059,
+        "ci95": [
+          2.1976314616059174,
+          3.4425377970617035
+        ],
+        "p": 9.859396420440994e-19
+      },
+      "speed_60": {
+        "or": 3.4817843237943267,
+        "ci95": [
+          2.8042203595182267,
+          4.3230632843357055
+        ],
+        "p": 1.3397722195643632e-29
+      },
+      "speed_70": {
+        "or": 5.239129402429691,
+        "ci95": [
+          3.6331685397500184,
+          7.554969331891191
+        ],
+        "p": 7.470608288609346e-19
+      },
+      "age_child": {
+        "or": 0.8966545888933075,
+        "ci95": [
+          0.8577578693850285,
+          0.9373151567351384
+        ],
+        "p": 1.4290538960326784e-06
+      },
+      "age_older": {
+        "or": 2.3637952603528656,
+        "ci95": [
+          2.245030007040049,
+          2.488843363048642
+        ],
+        "p": 1.1936492753990021e-234
+      },
+      "veh_heavy": {
+        "or": 1.73638137214734,
+        "ci95": [
+          1.5955001449540698,
+          1.8897022849390424
+        ],
+        "p": 2.0817972173583035e-37
+      },
+      "veh_other": {
+        "or": 1.2098023426749074,
+        "ci95": [
+          1.131796175742248,
+          1.293184885857942
+        ],
+        "p": 2.1355986618244178e-08
+      },
+      "veh_van": {
+        "or": 1.231613290046511,
+        "ci95": [
+          1.1452882220785712,
+          1.3244450322437071
+        ],
+        "p": 1.9230321781658498e-08
+      }
+    }
+  },
+  "masked_by_location": {
+    "In carriageway, crossing elsewhere": [
+      4896,
+      0.6651270207852193
+    ],
+    "Crossing on pedestrian crossing facility": [
+      842,
+      0.11438663225105285
+    ],
+    "Crossing elsewhere within 50m. of pedestrian crossing": [
+      835,
+      0.11343567450074718
+    ],
+    "In centre of carriageway - not on refuge, island or central reservation": [
+      511,
+      0.06941991577231355
+    ],
+    "Unknown or other": [
+      160,
+      0.02173617714984377
+    ],
+    "Crossing in zig-zag approach lines": [
+      38,
+      0.005162342073087895
+    ],
+    "On footway or verge": [
+      22,
+      0.0029887243581035185
+    ],
+    "In carriageway, not crossing": [
+      21,
+      0.0028528732509169948
+    ],
+    "On refuge, central island or central reservation": [
+      21,
+      0.0028528732509169948
+    ],
+    "Crossing in zig-zag exit lines": [
+      15,
+      0.0020377666077978536
+    ]
+  },
+  "coverage": {
+    "masked_total": 7361,
+    "on_facility": 895,
+    "on_facility_share": 0.1215867409319386,
+    "within_50m": 835,
+    "within_50m_share": 0.11343567450074718,
+    "no_facility_within_50m_share": 0.6640402119277272,
+    "ksi_on_facility": 308,
+    "ksi_total": 2520,
+    "fatal_total": 68,
+    "fatal_on_facility": 9,
+    "masked_share_of_crossing": 0.13184431588185774,
+    "masked_by_year": {
+      "2021": 1313,
+      "2022": 1588,
+      "2023": 1623,
+      "2024": 1438,
+      "2025": 1399
+    }
+  }
+}
